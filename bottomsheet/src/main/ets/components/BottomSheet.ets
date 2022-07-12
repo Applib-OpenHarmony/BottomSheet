@@ -22,41 +22,38 @@ export struct BottomSheet {
   @BuilderParam
   private body: () => any
 
-  aboutToAppear() {
-    if (this.model == null || this.model == undefined) {
-      return
-    }
-
-  }
-
   build() {
-    Stack({
-      alignContent: Alignment.Bottom
-    }) {
+    Column() {
+      if (this.model != null && this.model != undefined) {
+        Stack({
+          alignContent: Alignment.Bottom
+        }) {
 
-      Column() {
-      }
-      .height('100%')
-      .width('100%')
-      .backgroundColor(this.model.getBackgroundScreenColor())
-      .opacity(this.model.getBackgroundOpacity())
-      .onClick(() => {
-        this.visible = false
-      })
+          Column() {
+          }
+          .height('100%')
+          .width('100%')
+          .backgroundColor(this.model.getBackgroundScreenColor())
+          .opacity(this.model.getBackgroundOpacity())
+          .onClick(() => {
+            this.visible = false
+          })
 
-      if (this.body != null && this.body != undefined) {
-        Column() {
-          this.body()
+          if (this.body != null && this.body != undefined) {
+            Column() {
+              this.body()
+            }
+            .width('100%')
+            .borderRadius(this.model.getBorderRadius())
+            .borderColor(this.model.getBorderColor())
+            .backgroundColor(this.model.getBottomSheetBackgroundColor())
+            .alignItems(HorizontalAlign.Center)
+          }
         }
+        .height('100%')
         .width('100%')
-        .borderRadius(this.model.getBorderRadius())
-        .borderColor(this.model.getBorderColor())
-        .backgroundColor(this.model.getBottomSheetBackgroundColor())
-        .alignItems(HorizontalAlign.Center)
       }
     }
-    .height('100%')
-    .width('100%')
   }
 }
 
